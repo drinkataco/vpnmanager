@@ -1,0 +1,17 @@
+{
+  "name": "vpnmanager_develop",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "scripts": {
+    "start": "grunt",
+    "test": "grunt test"
+   },
+  "license": "GPL-3.0",
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-contrib-clean": "^0.7.0"
+  }
+}

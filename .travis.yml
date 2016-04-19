@@ -1,0 +1,7 @@
+language: python
+python:
+  - "3"
+install:
+  - npm install
+  - pip install --upgrade pip
+  - pip install flask

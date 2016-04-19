@@ -1,0 +1,10 @@
+{
+  "name": "vpnmanager",
+  "authors": [
+    "Josh Walwyn <me@joshwalwyn.com>"
+  ],
+  "description": "",
+  "dependencies": {
+    "bootstrap": "~3.3.5"
+  }
+}
