@@ -1,13 +1,13 @@
 {
-  "name": "vpnmanager_develop",
-  "repository": {
-    "type": "git",
-    "url": ""
-  },
+  "name": "vpnmanager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.py",
   "scripts": {
     "start": "grunt",
     "test": "grunt test"
-   },
+  },
+  "author": "Josh Walwyn",
   "license": "GPL-3.0",
   "dependencies": {},
   "devDependencies": {
