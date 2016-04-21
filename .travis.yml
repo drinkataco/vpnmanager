@@ -1,7 +1,8 @@
-# language: python
-# python:
-#   - "3"
-# install:
-#   - npm install
-#   - pip install --upgrade pip
-#   - pip install flask
+language: python
+python:
+  - 3
+before_install:
+  - npm install
+  - pip install --upgrade pip
+  - pip install flask
+  - grunt
