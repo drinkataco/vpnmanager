@@ -5,6 +5,7 @@
   ],
   "description": "",
   "dependencies": {
-    "bootstrap": "~3.3.5"
+    "jquery": "~2.2.3",
+    "bootstrap": "~3.3.6"
   }
 }
