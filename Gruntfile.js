@@ -17,12 +17,12 @@ module.exports = function(grunt) {
         // Clean files, keep minified dist
         clean: {
           dist: {
-            src: ['static/vendor/*/*', 
-                  '!static/vendor/*/dist',
-                  'static/vendor/**/*.css*',
-                  '!static/vendor/**/*.min.css*',
-                  'static/vendor/**/*.js*',
-                  '!static/vendor/**/*.min.js*']
+            src: ['**/vendor/*/*', 
+                  '!**/vendor/*/dist',
+                  '**/vendor/**/*.css*',
+                  '!**/vendor/**/*.min.css*',
+                  '**/vendor/**/*.js*',
+                  '!**/vendor/**/*.min.js*']
           }
         }
     });

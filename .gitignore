@@ -1,5 +1,6 @@
 *.pyc
+__pycache__
 .DS_Store
 /bower_components/
 /node_modules/
-/static/vendor/
+/vpnmanager/static/vendor/
