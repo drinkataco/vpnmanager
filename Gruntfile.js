@@ -27,7 +27,6 @@ module.exports = function(grunt) {
         }
     });
 
-    // grunt.registerTask('default', [ 'bower:install']);
     grunt.registerTask('default', 
       ['bower:install', 
        'clean:dist']

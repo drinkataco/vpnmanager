@@ -1,4 +1,36 @@
 {% extends "layout.html" %}
 {% block body %}
-    VPN Mng
+    <div class="row vpn-header">
+        <div class="col-sm-6">
+            <h1>VPN Manager</h1>
+        </div>
+        <div class="col-sm-6">
+        </div>
+    </div>
+    <form class="vpn-form form-inline">
+        <div class="form-group">
+            <label for="vpn-selection" class="sr-only">Select VPN</label>
+            <select class="form-control vpn-form-select" id="vpn-selection">
+                <option>at3.nordvpn.com</option>
+                <option>au10.nordvpn.com</option>
+                <option>au11.nordvpn.com</option>
+                <option>be1.nordvpn.com</option>
+                <option>ca12.nordvpn.com</option>
+                <option>ca1.nordvpn.com</option>
+                <option>ca2.nordvpn.com</option>
+                <option>ca3.nordvpn.com</option>
+                <option>ca4.nordvpn.com</option>
+            </select>
+            <select class="form-control vpn-form-tmn">
+                <option>UDP</option>
+                <option>TCP</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Change</button>
+    </form>
+    <div class="vpn-status">
+        <span class="glyphicon glyphicon-ok"></span> Connected to ca12.nordvpn.com.udp &bull; <a href="#">Set as Default</a>
+    </div>
+    <div class="vpn-options">
+    </div>
 {% endblock %}

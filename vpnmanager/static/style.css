@@ -1,0 +1,27 @@
+.vpn-form {
+    margin: 20px 0;
+}
+
+.vpn-form .vpn-form-select {
+    width: 220px;
+}
+
+.vpn-form .vpn-form-tmn {
+    width: 80px
+}
+
+.vpn-status {
+    font-size: .92em;
+}
+
+.vpn-status {
+    color: #737373
+}
+
+.vpn-status .glyphicon-ok {
+    color: #5CB85C;
+}
+
+.vpn-status .glyphicon-remove {
+    color: #D9534F;
+}
