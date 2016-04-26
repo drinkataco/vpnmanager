@@ -3,4 +3,4 @@ __pycache__
 .DS_Store
 /bower_components/
 /node_modules/
-/vpnmanager/static/vendor/
+/vpnquickswitch/static/vendor/
