@@ -1,2 +1,5 @@
+#!/usr/bin/env python3
 from vpnmanager import app
-app.run(debug=True)
+
+if __name__ == "__main__":
+    app.run(debug=True, port=1964)
