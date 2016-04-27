@@ -36,12 +36,14 @@ function showAlert(alertType, body, clearOnAdd) {
         alertsContainer.empty();
     }
 
-    alertsContainer.append('<div class="alert alert-' + alertType + ' alert-dismissible fade in" role="alert">\
+    var html = '<div class="alert alert-' + alertType + ' alert-dismissible fade in" style="display:none" role="alert">\
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">\
                 <span aria-hidden="true">×</span>\
             </button>\
             ' + body + '\
-        </div>');
+        </div>';
+
+    alertsContainer.append(html).find('.alert').slideDown('fast');
 }
 
 $(function() {
