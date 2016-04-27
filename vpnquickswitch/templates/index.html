@@ -7,12 +7,14 @@
         <div class="col-sm-6">
         </div>
     </div>
+    <div class="vpn-alerts">
+    </div>
     <form class="vpn-form form-inline">
         <div class="form-group">
             <label for="vpn-selection" class="sr-only">Select VPN</label>
             <select class="form-control vpn-form-select" id="vpn-selection">
                 {% for service in services %}
-                    <option valu="{{ service }}">{{ service }}</option>
+                    <option value="{{ service }}">{{ service }}</option>
                 {% endfor %}
             </select>
         </div>

@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from .vpn import *
 from .settings import *
 
@@ -17,7 +17,12 @@ def index():
 """
 @app.route("/change", methods=["POST"])
 def change_active_vpn():
-    pass
+    vpn = Vpn()
+    status = vpn.set_vpn_config(request.values['selection'])
+    if (status):
+        return '', 200
+    else:
+        return '', 500
 
 """
     Gets current openvpn information
