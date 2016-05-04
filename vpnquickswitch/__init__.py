@@ -4,6 +4,8 @@ from .settings import *
 
 app = Flask(__name__)
 
+load_config();
+
 """
     Form index
 """
