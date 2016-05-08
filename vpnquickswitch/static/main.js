@@ -1,8 +1,16 @@
 "use strict";
 
+/**
+ * Submit VPN Form, show alrts
+ * @return {void}
+ */
 function vpnForm() {
     $('#vpn-change-button').on('click', function(e) {
         var filechange = $('#vpn-selection').val();
+
+        if (filechange == '') {
+            return;
+        }
 
         $.ajax({
             type: "POST",
@@ -10,7 +18,8 @@ function vpnForm() {
             data: { selection: filechange },
             complete: function(xhr) {
                 if (xhr.status == '200') {
-                    showAlert('success', '<p>Successfully changed VPN configuration file to <b>' + filechange + '</b></p>', true);
+                    showAlert('info', '<p>Attempting to load <b>' + filechange + '</b>&hellip;</p><div class="progress" style="margin:10px 0 0"> <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"> </div> </div>', true);
+                    poolVpnChange();
                 } else {
                     showAlert('danger', '<p>Error changing configuration to <b>' + filechange + '</b></p>', true);
                 }
@@ -19,6 +28,14 @@ function vpnForm() {
 
         e.preventDefault();
     });
+}
+
+/**
+ * Keep attempting to check if VPN change has been successful
+ * @return {void}
+ */
+function poolVpnChange() {
+
 }
 
 /**
@@ -46,6 +63,9 @@ function showAlert(alertType, body, clearOnAdd) {
     alertsContainer.append(html).find('.alert').slideDown('fast');
 }
 
+/**
+ * Loader
+ */
 $(function() {
     vpnForm();
 });

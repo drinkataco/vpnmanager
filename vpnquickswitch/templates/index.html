@@ -13,6 +13,7 @@
         <div class="form-group">
             <label for="vpn-selection" class="sr-only">Select VPN</label>
             <select class="form-control vpn-form-select" id="vpn-selection">
+                <option value="">-- Select --</option>
                 {% for service in services %}
                     <option value="{{ service }}">{{ service }}</option>
                 {% endfor %}
