@@ -2,7 +2,8 @@ language: python
 python:
   - "3.4"
 before_install:
-  - npm install
-  - pip install --upgrade pip
-  - pip install flask
-  - grunt
+  - "npm install"
+  - "pip install --upgrade pip"
+  - "grunt"
+install:
+  - "pip install -r requirements.txt"
