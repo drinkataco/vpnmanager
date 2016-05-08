@@ -1,70 +1,53 @@
 import os
-import sys
 import configparser
 
-"""
-    Load configuration from file, or set defaults
-"""
-# Defaults
-conf_loc = "/Users/joshwalwyn/Desktop/openvpntest/vpnquickswitch"
-vpn_loc = "/Users/joshwalwyn/Desktop/openvpntest/"
-vpn_ext = "ovpn"
-default_name = "default"
-cred_loc = "/Users/joshwalwyn/Desktop/openvpntest/creds.txt"
+class Settings(object):
+    """
+        Load configuration from file, or set defaults
+    """
+    options = {}
 
-"""
-    Load/Make config file
-"""
-def load_config():
-    # config = ConfigParser.ConfigParser()
+    def __init__(self):
+        """
+            Load configuration file
+        """
+        try:
+            conf_loc = "/Users/joshwalwyn/Desktop/openvpntest/vpnquickswitch"
 
-    try:
-        conf_loc = "/Users/joshwalwyn/Desktop/openvpntest/vpnquickswitch"
+            config = configparser.ConfigParser()
+            config.readfp(open(conf_loc))
 
-        config = configparser.ConfigParser()
-        config.readfp(open(conf_loc))
+            for item in config.options('vpnquickswitch'):
+                self.options[item] = config.get('vpnquickswitch', item)
 
-        items = config.get('vpnquickswitch', 'cred_loc')
+            return;
 
-        vpn_loc = config.get('vpnquickswitch', 'vpn_loc')
-        vpn_ext = config.get('vpnquickswitch', 'vpn_ext')
-        default_name = config.get('vpnquickswitch', 'default_name')
-        cred_loc = config.get('vpnquickswitch', 'cred_loc')
+        except configparser.ParsingError:
+            print('ParsingError')
+        except OSError as e:
+            if isinstance(e, FileNotFoundError):
+                print('Configuration not found')
+                # make_file();
+            else:
+                raise e
+        except Exception as e:
+            print(e)
 
-        return;
+    def get_value(self, value):
+        """
+            Get config value, or if missing/incorrect, recreate
+        """
+        try:
+            val = self.options.get(value)
+            return val
+        except Exception as e:
+            print('Value missing')
+            sys.exit()
 
-    except ConfigParser.NoSectionError:
-        print('NoSectionError')
+    def make_file(self, file_loc):
+        """
+            TODO: Make Configuration file
+        """
         pass
-    except ConfigParser.NoOptionError:
-        print('NoOptionError')
-        pass
-    except ConfigParser.ParsingError:
-        print('ParsingError')
-        pass
-    except OSError as e:
-        if isinstance(e, FileNotFoundError):
-            pass
-        else:
-            raise e
-    except Exception as e:
-        print(e)
 
-    sys.exit("Here be dragons")
-
-def make_config():
-    pass
-
-"""
-    Get all VPN files
-"""
-def get_available_services():
-    services = []
-
-    trim_amount = len(vpn_ext) + 1
-
-    for file in os.listdir(vpn_loc):
-        if file.endswith(vpn_ext):
-            services.append(file[:-trim_amount])
-
-    return services
+settings = Settings()

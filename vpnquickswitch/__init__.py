@@ -4,14 +4,13 @@ from .settings import *
 
 app = Flask(__name__)
 
-load_config();
-
 """
     Form index
 """
 @app.route("/")
 def index():
-    services = get_available_services()
+    vpn = Vpn()
+    services = vpn.get_available_services()
     return render_template('index.html', services=services)
 
 """
