@@ -3,13 +3,13 @@ from .vpn import *
 from .settings import *
 
 app = Flask(__name__)
+vpn = Vpn()
 
 """
     Form index
 """
 @app.route("/")
 def index():
-    vpn = Vpn()
     services = vpn.get_available_services()
     return render_template('index.html', services=services)
 
@@ -18,7 +18,6 @@ def index():
 """
 @app.route("/change", methods=["POST"])
 def change_active_vpn():
-    vpn = Vpn()
     status = vpn.set_vpn_config(request.values['selection'])
     if (status):
         return '', 200

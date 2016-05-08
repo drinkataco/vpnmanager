@@ -1,6 +1,11 @@
+import subprocess
 from .settings import *
 
 class Vpn(object):
+    
+    process = ''
+    vpn_file = ''
+
     """
         OpenVPN management
     """
@@ -8,15 +13,25 @@ class Vpn(object):
         """
             Set VPN Configuration file to selected
         """
-        # TODO: openvpn <file>
-        # TODO: Get creds and enter them
-        print(file)
-        return False;
+        try:
+            path = "%s/%s.%s" % (settings.get_value('vpn_loc'), file, settings.get_value('vpn_ext'))
+            process = subprocess.Popen(['sudo',
+                                        'openvpn',
+                                        '--config',
+                                        path,
+                                        '--auth-user-pass',
+                                        settings.get_value('creds')])
+            return True;
+        except Exception as e:
+            return False
 
     def get_vpn_config(self):
         pass
 
     def check_vpn_status(self):
+        return True
+
+    def get_current_ip(self):
         pass
 
     def get_available_services(self):
