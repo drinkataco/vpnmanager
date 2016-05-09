@@ -16,37 +16,58 @@ function vpnForm() {
 
         var previousIp = currentStatus.ip;
 
-        console.log('previousIp');
-        console.log(previousIp);
+        // Alerts
+        var vpnFormAlert = function(type) {
+            switch (type) {
+                case 'attempting':
+                    showAlert('info', '<p>Attempting to load <b>' + filechange + '</b>&hellip;</p><div class="progress" style="margin:10px 0 0"> <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"> </div> </div>', true);
+                    break;
+                case 'success':
+                    showAlert('success', '<p>Openvpn configuration <b>' + filechange + '</b> loaded</p>', true);
+                    break;
+                case 'error':
+                    showAlert('danger', '<p>Error changing configuration to <b>' + filechange + '</b></p>', true);
+                    break;
+            }
+        }
 
+        // AJAX Request
         $.ajax({
             type: "POST",
             url: "/change",
             data: { selection: filechange },
             complete: function(xhr) {
+                
                 if (xhr.status == '200') {
-                    showAlert('info', '<p>Attempting to load <b>' + filechange + '</b>&hellip;</p><div class="progress" style="margin:10px 0 0"> <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"> </div> </div>', true);
+                    vpnFormAlert('attempting');
 
+                    // Set up interval timeout/iterations, and max tries
                     var intervalTimeout = 5000;
                     var iteration = 0;
-                    var maxInterval = intervalTimeout * 60;
+                    var maxInterval = intervalTimeout * 12;
 
                     var interval = setInterval(function() {
+                        // reset currentStatus
                         vpnStatus();
 
+                        // If IP changed, then success!
                         if (previousIp != currentStatus.ip) {
-                            showAlert('success', '<p>Openvpn configuration <b>' + filechange + '</b> loaded</p>', true);
+                            vpnFormAlert('success');
                             clearInterval(interval);
+                        // If max tries exceeded, then error and stop
                         } else if (iteration >= maxInterval) {
-                            showAlert('danger', '<p>Error changing configuration to <b>' + filechange + '</b></p>', true);
+                            vpnFormAlert('error');
+                            clearInterval(interval);
                         }
+                        console.log(iteration)
+                        console.log(maxInterval)
 
                         iteration += intervalTimeout;
 
                     }, intervalTimeout)
-                    // vpnStatus();
+
                 } else {
-                    showAlert('danger', '<p>Error changing configuration to <b>' + filechange + '</b></p>', true);
+                    vpnFormAlert('error');
                 }
             }
         })
