@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from .vpn import *
 from .settings import *
 
@@ -29,11 +29,12 @@ def change_active_vpn():
 """
 @app.route("/status", methods=["GET"])
 def get_current_status():
-    pass
+    response = {"ip": "1.1.1.8"}
+    return jsonify(response)
 
 """
     Change default VPN service
 """
 @app.route("/change-default", methods=["POST"])
-def change_default_servoce():
+def change_default_service():
     pass

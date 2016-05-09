@@ -1,5 +1,7 @@
 "use strict";
 
+var currentStatus;
+
 /**
  * Submit VPN Form, show alrts
  * @return {void}
@@ -12,6 +14,11 @@ function vpnForm() {
             return;
         }
 
+        var previousIp = currentStatus.ip;
+
+        console.log('previousIp');
+        console.log(previousIp);
+
         $.ajax({
             type: "POST",
             url: "/change",
@@ -19,7 +26,25 @@ function vpnForm() {
             complete: function(xhr) {
                 if (xhr.status == '200') {
                     showAlert('info', '<p>Attempting to load <b>' + filechange + '</b>&hellip;</p><div class="progress" style="margin:10px 0 0"> <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"> </div> </div>', true);
-                    poolVpnChange();
+
+                    var intervalTimeout = 5000;
+                    var iteration = 0;
+                    var maxInterval = intervalTimeout * 60;
+
+                    var interval = setInterval(function() {
+                        vpnStatus();
+
+                        if (previousIp != currentStatus.ip) {
+                            showAlert('success', '<p>Openvpn configuration <b>' + filechange + '</b> loaded</p>', true);
+                            clearInterval(interval);
+                        } else if (iteration >= maxInterval) {
+                            showAlert('danger', '<p>Error changing configuration to <b>' + filechange + '</b></p>', true);
+                        }
+
+                        iteration += intervalTimeout;
+
+                    }, intervalTimeout)
+                    // vpnStatus();
                 } else {
                     showAlert('danger', '<p>Error changing configuration to <b>' + filechange + '</b></p>', true);
                 }
@@ -34,8 +59,10 @@ function vpnForm() {
  * Keep attempting to check if VPN change has been successful
  * @return {void}
  */
-function poolVpnChange() {
-
+function vpnStatus() {
+    $.get("/status", function(json) {
+        currentStatus = json;
+    });
 }
 
 /**
@@ -67,5 +94,6 @@ function showAlert(alertType, body, clearOnAdd) {
  * Loader
  */
 $(function() {
+    vpnStatus();
     vpnForm();
 });
