@@ -29,8 +29,7 @@ def change_active_vpn():
 """
 @app.route("/status", methods=["GET"])
 def get_current_status():
-    response = {"ip": "1.1.1.8"}
-    return jsonify(response)
+    return jsonify(vpn.get_current_status())
 
 """
     Change default VPN service

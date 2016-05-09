@@ -16,7 +16,7 @@ class Vpn(object):
         try:
             path = "%s/%s.%s" % (settings.get_value('vpn_loc'), file, settings.get_value('vpn_ext'))
             self.process = subprocess.Popen(['sudo',
-                                      'openvpn',
+                                      settings.get_value('daemon'),
                                       '--config',
                                       path,
                                       '--auth-user-pass',
@@ -30,11 +30,9 @@ class Vpn(object):
     def get_vpn_config(self):
         pass
 
-    def check_vpn_status(self):
-        return True
-
-    def get_current_ip(self):
-        pass
+    def get_current_status(self):
+        # Fetch IP here
+        return {"ip": "1.1.1.8"}
 
     def get_available_services(self):
         """
