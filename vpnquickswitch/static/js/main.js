@@ -1,6 +1,7 @@
 "use strict";
 
 var currentStatus;
+var taglineSet = false;
 
 /**
  * Submit VPN Form, show alrts
@@ -44,7 +45,7 @@ function vpnForm() {
                     // Set up interval timeout/iterations, and max tries
                     var intervalTimeout = 5000;
                     var iteration = 0;
-                    var maxInterval = intervalTimeout * 12;
+                    var maxInterval = intervalTimeout * 6;
 
                     var interval = setInterval(function() {
                         // reset currentStatus
@@ -59,8 +60,6 @@ function vpnForm() {
                             vpnFormAlert('error');
                             clearInterval(interval);
                         }
-                        console.log(iteration)
-                        console.log(maxInterval)
 
                         iteration += intervalTimeout;
 
@@ -83,6 +82,7 @@ function vpnForm() {
 function vpnStatus() {
     $.get("/status", function(json) {
         currentStatus = json;
+        vpnTaglineUpdate()
     });
 }
 
@@ -111,10 +111,17 @@ function showAlert(alertType, body, clearOnAdd) {
     alertsContainer.append(html).find('.alert').slideDown('fast');
 }
 
+function vpnTaglineUpdate()
+{
+    $('.vpn-tagline').html(new Date().toLocaleString());
+}
+
 /**
  * Loader
  */
 $(function() {
     vpnStatus();
     vpnForm();
+    vpnTaglineUpdate();
+    setInterval(vpnTaglineUpdate, 30000);
 });

@@ -1,14 +1,16 @@
 import subprocess
+import json
+from urllib.request import urlopen
 from .settings import *
 
 class Vpn(object):
-    vpn_file = ''
-    status   = ''
-    process  = ''
-
     """
         OpenVPN management
     """
+    vpn_file     = ''
+    current_ip   = ''
+    process  = ''
+
     def set_vpn_config(self, file):
         """
             Set VPN Configuration file to selected
@@ -31,8 +33,20 @@ class Vpn(object):
         pass
 
     def get_current_status(self):
+        """
+            Return object of current status/settings
+        """
         # Fetch IP here
-        return {"ip": "1.1.1.8"}
+        self.current_ip = json.loads(urlopen('https://api.ipify.org?format=json').read().decode("utf-8")).get('ip')
+
+        return {"connected": True,
+                "file": "x",
+                "ip"  : self.current_ip,
+                "info": {
+                  "country": "United Kingdom",
+                  "country-iso": "uk"
+                }
+               }
 
     def get_available_services(self):
         """

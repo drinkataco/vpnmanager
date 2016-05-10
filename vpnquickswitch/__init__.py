@@ -11,7 +11,7 @@ vpn = Vpn()
 @app.route("/")
 def index():
     services = vpn.get_available_services()
-    return render_template('index.html', services=services)
+    return render_template('index.html', services=services, status=vpn.get_current_status())
 
 """
     Form submission
