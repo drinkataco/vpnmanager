@@ -11,7 +11,7 @@ vpn = Vpn()
 @app.route("/")
 def index():
     services = vpn.get_available_services()
-    return render_template('index.html', services=services, status=vpn.get_current_status())
+    return render_template('index.html', services=services)
 
 """
     Form submission
@@ -30,6 +30,13 @@ def change_active_vpn():
 @app.route("/status", methods=["GET"])
 def get_current_status():
     return jsonify(vpn.get_current_status())
+
+"""
+    Get tagline
+"""
+@app.route("/tagline", methods=["GET"])
+def update_tagline():
+    return render_template('tagline.html', status=vpn.get_current_status())
 
 """
     Change default VPN service

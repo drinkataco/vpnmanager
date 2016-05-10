@@ -45,7 +45,7 @@ function vpnForm() {
                     // Set up interval timeout/iterations, and max tries
                     var intervalTimeout = 5000;
                     var iteration = 0;
-                    var maxInterval = intervalTimeout * 6;
+                    var maxInterval = intervalTimeout * 12;
 
                     var interval = setInterval(function() {
                         // reset currentStatus
@@ -111,9 +111,15 @@ function showAlert(alertType, body, clearOnAdd) {
     alertsContainer.append(html).find('.alert').slideDown('fast');
 }
 
+/**
+ * Update current tagline. Uses internal method mapped to GET /status
+ * @return {void}
+ */
 function vpnTaglineUpdate()
 {
-    $('.vpn-tagline').html(new Date().toLocaleString());
+    $.get("/tagline", function(html) {
+        $('.vpn-tagline').html(html);
+    });
 }
 
 /**

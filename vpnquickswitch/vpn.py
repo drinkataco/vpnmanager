@@ -40,11 +40,11 @@ class Vpn(object):
         self.current_ip = json.loads(urlopen('https://api.ipify.org?format=json').read().decode("utf-8")).get('ip')
 
         return {"connected": True,
-                "file": "x",
+                "file": self.vpn_file,
                 "ip"  : self.current_ip,
                 "info": {
                   "country": "United Kingdom",
-                  "country-iso": "uk"
+                  "country_iso": "cz"
                 }
                }
 
