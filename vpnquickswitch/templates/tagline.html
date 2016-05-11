@@ -1,9 +1,8 @@
 {% if status.connected %}
-    <span class="glyphicon glyphicon-ok"></span>
-    Connected to {{ status.vpn_file }}
-    {% if status.info.country_iso %}
+    Connected to <span title="{{ status.file }}">{{ status.ip }}</span>
+    {% if status.info.countryCode %}
         &bull;
-        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" class="flag flag-{{ status.info.country_iso }}" alt="{{ status.info.country }}" title="{{ status.info.country }}">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" class="flag flag-{{ status.info.countryCode|lower }}" alt="{{ status.info.city }}, {{ status.info.country }}" title="{{ status.info.city }}, {{ status.info.country }}">
     {% endif %}
     &bull;
     <a href="#">Set as Default</a>

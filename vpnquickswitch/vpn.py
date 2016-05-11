@@ -7,8 +7,8 @@ class Vpn(object):
     """
         OpenVPN management
     """
-    vpn_file     = ''
-    current_ip   = ''
+    vpn_file = ''
+    ip_info  = ''
     process  = ''
 
     def set_vpn_config(self, file):
@@ -37,16 +37,12 @@ class Vpn(object):
             Return object of current status/settings
         """
         # Fetch IP here
-        self.current_ip = json.loads(urlopen('https://api.ipify.org?format=json').read().decode("utf-8")).get('ip')
-
+        self.ip_info = json.loads(urlopen('http://ip-api.com/json').read().decode("utf-8"))
         return {"connected": True,
-                "file": self.vpn_file,
-                "ip"  : self.current_ip,
-                "info": {
-                  "country": "United Kingdom",
-                  "country_iso": "cz"
-                }
-               }
+                "file"     : self.vpn_file,
+                "ip"       : self.ip_info['query'],
+                "info"     : self.ip_info
+               };
 
     def get_available_services(self):
         """
