@@ -35,7 +35,7 @@ function vpnForm() {
         // AJAX Request
         $.ajax({
             type: "POST",
-            url: "/change",
+            url: "change",
             data: { selection: filechange },
             complete: function(xhr) {
                 
@@ -80,7 +80,7 @@ function vpnForm() {
  * @return {void}
  */
 function vpnStatus() {
-    $.get("/status", function(json) {
+    $.get("status", function(json) {
         currentStatus = json;
         vpnTaglineUpdate()
     });
@@ -117,7 +117,7 @@ function showAlert(alertType, body, clearOnAdd) {
  */
 function vpnTaglineUpdate()
 {
-    $.get("/tagline", function(html) {
+    $.get("tagline", function(html) {
         $('.vpn-tagline').html(html);
     });
 }

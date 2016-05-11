@@ -5,10 +5,16 @@ from .settings import *
 app = Flask(__name__)
 vpn = Vpn()
 
+site_root = settings.get_value('uri')
+if (site_root == ''):
+    site_root = '/'
+else:
+    site_root = '/' + site_root + '/'
+
 """
     Form index
 """
-@app.route("/")
+@app.route(site_root)
 def index():
     services = vpn.get_available_services()
     return render_template('index.html', services=services)
@@ -16,7 +22,7 @@ def index():
 """
     Form submission
 """
-@app.route("/change", methods=["POST"])
+@app.route(site_root + "change", methods=["POST"])
 def change_active_vpn():
     status = vpn.set_vpn_config(request.values['selection'])
     if (status):
@@ -27,20 +33,20 @@ def change_active_vpn():
 """
     Gets current openvpn information
 """
-@app.route("/status", methods=["GET"])
+@app.route(site_root + "status", methods=["GET"])
 def get_current_status():
     return jsonify(vpn.get_current_status())
 
 """
     Get tagline
 """
-@app.route("/tagline", methods=["GET"])
+@app.route(site_root + "tagline", methods=["GET"])
 def update_tagline():
     return render_template('tagline.html', status=vpn.get_current_status())
 
 """
     Change default VPN service
 """
-@app.route("/change-default", methods=["POST"])
+@app.route(site_root + "change-default", methods=["POST"])
 def change_default_service():
     pass
