@@ -1,5 +1,5 @@
 import os
-import configparser
+import ConfigParser
 
 class Settings(object):
     """
@@ -14,7 +14,7 @@ class Settings(object):
         try:
             conf_loc = "/Users/joshwalwyn/Desktop/openvpntest/vpnquickswitch"
 
-            config = configparser.ConfigParser()
+            config = ConfigParser.ConfigParser()
             config.readfp(open(conf_loc))
 
             for item in config.options('vpnquickswitch'):
@@ -22,7 +22,7 @@ class Settings(object):
 
             return;
 
-        except configparser.ParsingError:
+        except ConfigParser.ParsingError:
             print('ParsingError')
         except OSError as e:
             if isinstance(e, FileNotFoundError):

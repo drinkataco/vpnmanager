@@ -1,6 +1,6 @@
 import subprocess
 import json
-from urllib.request import urlopen
+from urllib import *
 from .settings import *
 
 class Vpn(object):
