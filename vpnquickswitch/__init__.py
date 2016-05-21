@@ -2,14 +2,16 @@ from flask import Flask, render_template, request, jsonify
 from .vpn import *
 from .settings import *
 
-app = Flask(__name__)
 vpn = Vpn()
 
 site_root = settings.get_value('uri')
+
 if (site_root == ''):
     site_root = '/'
+    app = Flask(__name__)
 else:
-    site_root = '/' + site_root + '/'
+    site_root = site_root + '/'
+    app = Flask(__name__, static_url_path = site_root + 'static')
 
 """
     Form index
