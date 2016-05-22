@@ -58,5 +58,5 @@ class Vpn(object):
         for file in os.listdir(vpnloc):
             if file.endswith(ext):
                 services.append(file[:-trim_amount])
-
+        services.sort()
         return services

@@ -1,4 +1,4 @@
 {
-  "directory": "static/vendor",
+  "directory": "vpnquickswitch/static/vendor",
   "json": "bower.json"
 }

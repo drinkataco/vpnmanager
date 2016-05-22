@@ -12,7 +12,7 @@ class Settings(object):
             Load configuration file
         """
         try:
-            conf_loc = "/Users/joshwalwyn/Desktop/openvpntest/vpnquickswitch"
+            conf_loc = "/home/jjw/ini/vpnquickswitch"
 
             config = ConfigParser.ConfigParser()
             config.readfp(open(conf_loc))
