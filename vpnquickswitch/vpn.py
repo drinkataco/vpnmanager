@@ -37,7 +37,7 @@ class Vpn(object):
             Return object of current status/settings
         """
         # Fetch IP here
-        self.ip_info = json.loads(urlopen('http://ip-api.com/json').read().decode("utf-8"))
+        self.ip_info = json.loads(request.urlopen('http://ip-api.com/json').read().decode("utf-8"))
         return {"connected": True,
                 "file"     : self.vpn_file,
                 "ip"       : self.ip_info['query'],

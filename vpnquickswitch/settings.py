@@ -1,5 +1,5 @@
 import os
-import ConfigParser
+import configparser
 
 class Settings(object):
     """
@@ -13,16 +13,14 @@ class Settings(object):
         """
         try:
             conf_loc = "/home/jjw/ini/vpnquickswitch"
-
-            config = ConfigParser.ConfigParser()
+            config = configparser.ConfigParser()
             config.readfp(open(conf_loc))
-
             for item in config.options('vpnquickswitch'):
                 self.options[item] = config.get('vpnquickswitch', item)
 
             return;
 
-        except ConfigParser.ParsingError:
+        except configparser.ParsingError:
             print('ParsingError')
         except OSError as e:
             if isinstance(e, FileNotFoundError):

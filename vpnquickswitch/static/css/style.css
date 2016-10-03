@@ -4,6 +4,11 @@
 
 .vpn-form .vpn-form-select {
     width: 260px;
+    max-width: 100%;
+}
+
+.vpn-form {
+    width: 100%;
 }
 
 .vpn-status {
